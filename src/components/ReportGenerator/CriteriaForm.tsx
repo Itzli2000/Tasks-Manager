@@ -1,3 +1,4 @@
+import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import React, { useState } from 'react';
 
 interface CriteriaFormProps {
@@ -22,29 +23,39 @@ const CriteriaForm: React.FC<CriteriaFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Fecha de Inicio</label>
-      <input
+      <TextField
+        label="Fecha de Inicio"
         type="date"
         value={startDate}
         onChange={e => setStartDate(e.target.value)}
+        InputLabelProps={{ shrink: true }}
+        fullWidth
+        margin="normal"
       />
 
-      <label>Fecha de Fin</label>
-      <input
+      <TextField
+        label="Fecha de Fin"
         type="date"
         value={endDate}
         onChange={e => setEndDate(e.target.value)}
+        InputLabelProps={{ shrink: true }}
+        fullWidth
+        margin="normal"
       />
 
-      <label>Estado</label>
-      <select value={status} onChange={e => setStatus(e.target.value)}>
-        <option value="">Todos</option>
-        <option value="pending">Pendiente</option>
-        <option value="in_progress">En Progreso</option>
-        <option value="completed">Completado</option>
-      </select>
+      <FormControl fullWidth margin="normal">
+        <InputLabel>Estado</InputLabel>
+        <Select displayEmpty value={status} onChange={e => setStatus(e.target.value)}>
+          <MenuItem value="">Todos</MenuItem>
+          <MenuItem value="pending">Pendiente</MenuItem>
+          <MenuItem value="in_progress">En Progreso</MenuItem>
+          <MenuItem value="completed">Completado</MenuItem>
+        </Select>
+      </FormControl>
 
-      <button type="submit">Generar Reporte</button>
+      <Button type="submit" variant="contained" color="primary" fullWidth>
+        Generar Reporte
+      </Button>
     </form>
   );
 };

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Task } from '../../types';
-import { fetchTasks } from '../../services/api';
+import { fetchTasks, updateTaskStatus } from '../../services/api';
 import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import { Card, CardContent, Typography, Box, Button } from '@mui/material';
 
 const TaskDetails: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -29,12 +30,21 @@ const TaskDetails: React.FC = () => {
   if (!task) return <div>No se encontró la tarea.</div>;
 
   return (
-    <div className="task-details">
-      <h2>{task.title}</h2>
-      <p>{task.description}</p>
-      <p>Estado: {task.status}</p>
-      <p>Asignado a: {task.assignedTo}</p>
-    </div>
+    <Card>
+      <CardContent>
+        <Typography variant="h5" gutterBottom>{task.title}</Typography>
+        <Typography variant="body1" gutterBottom>{task.description}</Typography>
+        <Typography variant="body2" color="textSecondary">Estado: {task.status}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          Fecha Límite: {new Date(task.deadline).toLocaleDateString()}
+        </Typography>
+        <Box mt={2}>
+          <Button variant="contained" color="primary" onClick={() => updateTaskStatus(task.id, 'completed')}>
+            Marcar como Completada
+          </Button>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 

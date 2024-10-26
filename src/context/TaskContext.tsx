@@ -1,18 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Task } from '../types';
 import api from '../services/api';
-
-interface TaskContextType {
-  tasks: Task[];
-  filteredTasks: Task[];
-  fetchTasks: () => void;
-  addTask: (task: Task) => void;
-  updateTaskStatus: (taskId: string, status: string) => void;
-  deleteTask: (taskId: string) => void;
-  setFilteredTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-}
-
-const TaskContext = createContext<TaskContextType | undefined>(undefined);
+import { TaskContext } from './TaskContextType';
 
 export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -48,10 +37,4 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
       {children}
     </TaskContext.Provider>
   );
-};
-
-export const useTaskContext = (): TaskContextType => {
-  const context = useContext(TaskContext);
-  if (!context) throw new Error('useTaskContext must be used within a TaskProvider');
-  return context;
 };

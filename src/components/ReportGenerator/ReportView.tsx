@@ -1,5 +1,6 @@
 import React from 'react';
 import { Task } from '../../types';
+import { Typography, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 
 interface ReportViewProps {
   reportData: Task[];
@@ -7,32 +8,32 @@ interface ReportViewProps {
 
 const ReportView: React.FC<ReportViewProps> = ({ reportData }) => {
   return (
-    <div className="report-view">
-      <h3>Reporte de Tareas</h3>
-      {reportData.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Descripción</th>
-              <th>Estado</th>
-              <th>Fecha Límite</th>
-            </tr>
-          </thead>
-          <tbody>
+    <div>
+      <Typography variant="h5" gutterBottom>
+        Reporte de Tareas
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Título</TableCell>
+              <TableCell>Descripción</TableCell>
+              <TableCell>Estado</TableCell>
+              <TableCell>Fecha Límite</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {reportData.map(task => (
-              <tr key={task.id}>
-                <td>{task.title}</td>
-                <td>{task.description}</td>
-                <td>{task.status}</td>
-                <td>{new Date(task.deadline).toLocaleDateString()}</td>
-              </tr>
+              <TableRow key={task.id}>
+                <TableCell>{task.title}</TableCell>
+                <TableCell>{task.description}</TableCell>
+                <TableCell>{task.status}</TableCell>
+                <TableCell>{new Date(task.deadline).toLocaleDateString()}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No hay tareas que coincidan con los criterios seleccionados.</p>
-      )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

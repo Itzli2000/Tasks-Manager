@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Navigation from './components/Navigation/Navigation';
 import TaskDetails from './components/TaskDetails/TaskDetails';
 import ReportGenerator from './components/ReportGenerator/ReportGenerator';
+import NewTaskForm from './components/Dashboard/NewTaskForm';
 
 const App: React.FC = () => (
   <TaskProvider>
@@ -15,6 +16,7 @@ const App: React.FC = () => (
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/task/:taskId" element={<TaskDetails />} />
+          <Route path="/new-task/" element={<NewTaskForm />} />
           <Route path="/generate-report" element={<ReportGenerator />} />
           <Route path="/" element={<Dashboard />} />
         </Routes>
