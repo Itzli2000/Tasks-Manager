@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Task } from '../../types';
+import { useTaskContext } from '../../context/TaskContext';
 import { v4 as uuidv4 } from 'uuid';
 import { Box, Typography, TextField, Button } from '@mui/material';
-import { useTaskContext } from '../../hooks/useTaskContext';
 
 const NewTaskForm: React.FC = () => {
   const { addTask } = useTaskContext();
